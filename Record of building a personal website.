@@ -1,0 +1,23 @@
+Record of building a personal website.
+
+Related tools: 
+	Host : Amazon Web Services-Elastic Compute Cloud  
+	Domain: Godaddy domain
+	Web Server: Tomcat8
+	Database: MySQL Server
+	Development IDE: IntelliJ IDEA
+
+
+1. Buy a domain on godaddy starts with 5 dollars per year.
+
+2. Sign up for AWS. Then build an EC2 entity with Aamazon Linux. Set up safety group to open 80 and 8080 port. Port 22 is open by default When the EC2 entity is initialized. However, http and tcp port is not open yet. So, add inbound rules. And redirect request from port 80 to port 8080 by command: sudo iptables -A PREROUTING -t nat -p tcp --dport 80 -j REDIRECT --to-port 8080. By the way, bind EC2 IP to domain.
+
+3. Build artifact of existing project. Send the artifact to tomcat8/webapps folder using command: scp -i <user.pem> <source file> <destination directory path>. It's not necessarily but good to set tomcat8 context so that users do not need to input folder name of the project in url.
+
+4. Download MySQL. EC2 has already downloaded MySQL yet. So, remove the existing MySQL by command: rpm -rm <MySQL> and then download MySQL by Command: sudo yum install mysql mysql-server mysql-con. 
+
+5. Download JDK8. I build project with java1.8. However, EC2 has java1.7. So, uninstall JDK7 and install JDK8.
+
+6. Modify root password and create tables in database. Start tomcat service.
+
+7. Finally, all finished. Type domain in browser and enjoy personal website.
